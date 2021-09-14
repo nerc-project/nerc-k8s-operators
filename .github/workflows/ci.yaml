@@ -1,0 +1,71 @@
+name: Lint and Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  run-linters:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '^3.9'
+
+      - name: Configure caching (python)
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ env.pythonLocation }}-${{ hashFiles('test-requirements.txt') }}
+
+      - name: Install python test requirements
+        run: |
+          pip install --upgrade --upgrade-strategy eager -r test-requirements.txt
+
+      - name: Configure caching (pre-commit)
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pre-commit
+          key: precommit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
+
+      - name: Run linters (pre-commit)
+        run: |
+          pre-commit run --all-files
+
+  run-kustomize:
+    runs-on: ubuntu-latest
+    needs:
+      - run-linters
+    env:
+      KUSTOMIZE_VERSION: 4.3.0
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Configure caching
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/bin
+          key: kustomize-${{ runner.os }}-${{ env.KUSTOMIZE_VERSION }}
+
+      - name: Install kustomize
+        run: |
+          if ! [ -f "$HOME/.cache/bin/kustomize" ]; then
+            echo "Installing kustomize"
+            mkdir -p $HOME/.cache/bin
+            export PATH=$HOME/.cache/bin:$PATH
+            curl -Lsf -o kustomize.tar.gz https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz
+            tar -C $HOME/.cache/bin -xf kustomize.tar.gz
+          else
+            echo "Using kustomize from cache"
+          fi
+
+      - name: Run kustomize build
+        run: |
+          ./ci-scripts/run-kustomize-build.sh

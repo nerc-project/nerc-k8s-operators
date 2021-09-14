@@ -1,4 +1,5 @@
 resources:
+  - argocd
   - local-storage
   - ocs
   - stf

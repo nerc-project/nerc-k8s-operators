@@ -14,7 +14,9 @@ function run_kustomize() {
   fi
 }
 
-run_kustomize ${ROOT_PATH}/base
+for base in ${ROOT_PATH}/base/*; do
+  run_kustomize "${base}"
+done
 
 for overlay in ${ROOT_PATH}/overlays/*; do
   run_kustomize "${overlay}"

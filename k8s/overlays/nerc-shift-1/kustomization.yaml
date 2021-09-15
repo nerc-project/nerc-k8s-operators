@@ -1,3 +1,4 @@
 resources:
-  - ../../base/keycloak
-  - keycloak.yaml
+  - local-storage
+  - ocs
+  - keycloak

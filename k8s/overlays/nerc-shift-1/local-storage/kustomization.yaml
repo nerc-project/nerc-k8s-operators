@@ -1,0 +1,4 @@
+resources:
+  - ../../../base/local-storage
+  - localvolumediscovery.yaml
+  - localvolumeset.yaml

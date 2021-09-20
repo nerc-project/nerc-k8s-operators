@@ -9,4 +9,3 @@ spec:
   name: service-telemetry-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-

@@ -10,4 +10,4 @@ spec:
   name: local-storage-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: local-storage-operator.4.7.0-202107292319
+  startingCSV: local-storage-operator.4.7.0-202108311835

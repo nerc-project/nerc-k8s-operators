@@ -1,6 +1,8 @@
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
+  annotations:
+    olm.providedAPIs: LocalVolume.v1.local.storage.openshift.io,LocalVolumeDiscovery.v1alpha1.local.storage.openshift.io,LocalVolumeDiscoveryResult.v1alpha1.local.storage.openshift.io,LocalVolumeSet.v1alpha1.local.storage.openshift.io
   name: local-storage-operator-group
 spec:
   targetNamespaces:

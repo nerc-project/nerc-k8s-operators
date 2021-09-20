@@ -1,0 +1,71 @@
+apiVersion: infra.watch/v1beta1
+kind: ServiceTelemetry
+metadata:
+  name: default
+spec:
+  alerting:
+    enabled: true
+    alertmanager:
+      storage:
+        strategy: persistent
+        persistent:
+          pvcStorageRequest: 200G
+          storageSelector: {}
+          storageClass: ocs-storagecluster-ceph-rbd
+        receivers:
+          snmpTraps:
+            enabled: false
+            target: 192.168.24.254
+  backends:
+    events:
+      elasticsearch:
+        enabled: true
+        storage:
+          strategy: persistent
+          persistent:
+            pvcStorageRequest: 200Gi
+            storageSelector: {}
+            storageClass: ocs-storagecluster-ceph-rbd
+    metrics:
+      prometheus:
+        enabled: true
+        scrapeInterval: 10s
+        storage:
+          strategy: persistent
+          persistent:
+            pvcStorageRequest: 200G
+            storageSelector: {}
+            storageClass: ocs-storagecluster-ceph-rbd
+          retention: 24h
+  graphing:
+    enabled: true
+    grafana:
+      adminPassword: secret
+      adminUser: root
+      disableSignoutMenu: false
+      ingressEnabled: false
+  highAvailability:
+    enabled: true
+  transports:
+    qdr:
+      enabled: true
+      web:
+        enabled: false
+  clouds:
+    - name: nerc-overcloud
+      metrics:
+        collectors:
+          - collectorType: collectd
+            subscriptionAddress: collectd/telemetry
+            debugEnabled: false
+          - collectorType: ceilometer
+            subscriptionAddress: anycast/ceilometer/metering.sample
+            debugEnabled: false
+      events:
+        collectors:
+          - collectorType: collectd
+            subscriptionAddress: collectd/notify
+            debugEnabled: false
+          - collectorType: ceilometer
+            subscriptionAddress: anycast/ceilometer/event.sample
+            debugEnabled: false

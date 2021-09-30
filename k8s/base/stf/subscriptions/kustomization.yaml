@@ -1,0 +1,4 @@
+resources:
+  - amq7-cert-manager-operator.yaml
+  - elasticsearch-eck-operator-certified.yaml
+  - service-telemetry-operator.yaml

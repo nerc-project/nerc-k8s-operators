@@ -1,0 +1,6 @@
+namespace: service-telemetry
+resources:
+  - namespace.yaml
+  - operatorgroup.yaml
+  - catalogsources
+  - subscriptions

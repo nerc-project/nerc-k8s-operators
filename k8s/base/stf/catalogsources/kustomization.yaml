@@ -1,3 +1,2 @@
 resources:
   - operatorhubio.yaml
-  - redhat-operators-stf.yaml

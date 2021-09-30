@@ -4,9 +4,8 @@ metadata:
   name: amq7-cert-manager-operator
   namespace: openshift-operators
 spec:
-  channel: alpha
+  channel: 1.x
   installPlanApproval: Automatic
   name: amq7-cert-manager-operator
-  source: redhat-operators-stf
+  source: redhat-operators
   sourceNamespace: openshift-marketplace
-  targetNamespaces: global

@@ -1,4 +1,5 @@
 resources:
   - local-storage
   - ocs
+  - stf
   - keycloak

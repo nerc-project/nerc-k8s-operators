@@ -1,0 +1,6 @@
+resources:
+  - ../../../base/argocd
+  - configmap.yaml
+  - securitycontextconstraints.yaml
+  - argocd.yaml
+  - clusterrolebindings

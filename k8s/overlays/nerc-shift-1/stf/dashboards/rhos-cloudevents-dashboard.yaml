@@ -1,0 +1,271 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  labels:
+    app: grafana
+  name: rhos-cloudevents-dashboard
+  namespace: service-telemetry
+spec:
+  json: |
+    {
+      "__requires": [
+        {
+          "type": "datasource",
+          "id": "elasticsearch",
+          "name": "Elasticsearch",
+          "version": "1.0.0"
+        },
+        {
+          "type": "grafana",
+          "id": "grafana",
+          "name": "Grafana",
+          "version": "8.0.4"
+        },
+        {
+          "type": "panel",
+          "id": "table",
+          "name": "Table",
+          "version": ""
+        }
+      ],
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "gnetId": null,
+      "graphTooltip": 0,
+      "id": null,
+      "iteration": 1626201489980,
+      "links": [],
+      "panels": [
+        {
+          "datasource": "es_ceilometer",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "displayMode": "auto"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "severity"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 73
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cell_name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 121
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "disk_gb"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 73
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "ephemeral_gb"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 124
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "vcpus"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 57
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "id": 2,
+          "options": {
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "8.0.4",
+          "repeat": "indices",
+          "repeatDirection": "v",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "500"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "generated"
+            }
+          ],
+          "title": "$indices",
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "_id": true,
+                  "_index": true,
+                  "_type": true,
+                  "annotations.processed_by": true,
+                  "event_type": true,
+                  "highlight": true,
+                  "sort": true
+                },
+                "indexByName": {
+                  "_id": 0,
+                  "_index": 1,
+                  "_type": 2,
+                  "annotations.processed_by": 3,
+                  "annotations.source_type": 9,
+                  "event_type": 4,
+                  "generated": 7,
+                  "highlight": 5,
+                  "labels.audit_period_beginning": 10,
+                  "labels.audit_period_ending": 11,
+                  "labels.cell_name": 12,
+                  "labels.disk_gb": 13,
+                  "labels.display_name": 14,
+                  "labels.ephemeral_gb": 15,
+                  "labels.host": 16,
+                  "labels.instance_id": 17,
+                  "labels.instance_type": 18,
+                  "labels.instance_type_id": 19,
+                  "labels.launched_at": 20,
+                  "labels.memory_mb": 21,
+                  "labels.project_id": 22,
+                  "labels.request_id": 23,
+                  "labels.resource_id": 24,
+                  "labels.root_gb": 25,
+                  "labels.service": 26,
+                  "labels.state": 27,
+                  "labels.tenant_id": 28,
+                  "labels.user_id": 29,
+                  "labels.vcpus": 30,
+                  "severity": 8,
+                  "sort": 6
+                },
+                "renameByName": {}
+              }
+            },
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "(annotations|labels).([a-zA-Z\\d\\_-].+)",
+                "renamePattern": "$2"
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "schemaVersion": 30,
+      "style": "dark",
+      "tags": [
+        "cloud-dashboards"
+      ],
+      "templating": {
+        "list": [
+          {
+            "allValue": null,
+            "current": {},
+            "datasource": "es_ceilometer",
+            "definition": "{\"find\": \"terms\", \"field\": \"_index\"}",
+            "description": null,
+            "error": null,
+            "hide": 2,
+            "includeAll": true,
+            "label": null,
+            "multi": false,
+            "name": "indices",
+            "options": [],
+            "query": "{\"find\": \"terms\", \"field\": \"_index\"}",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-24h",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Cloud Events",
+      "uid": "r8DlN-mnk",
+      "version": 10
+    }

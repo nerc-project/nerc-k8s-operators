@@ -1,0 +1,4 @@
+resources:
+  - rhos-dashboard.yaml
+  - rhos-cloud-dashboard.yaml
+  - rhos-cloudevents-dashboard.yaml

@@ -1,6 +1,7 @@
 resources:
   - argocd
   - local-storage
+  - vault
   - ocs
   - stf
   - keycloak

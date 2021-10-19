@@ -1,0 +1,10 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  annotations:
+    olm.providedAPIs: Vault.v1alpha1.vault.banzaicloud.com
+  name: vault-operator-group
+  namespace: vault
+spec:
+  targetNamespaces:
+    - vault

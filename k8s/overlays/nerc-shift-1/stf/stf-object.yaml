@@ -62,6 +62,10 @@ spec:
           - collectorType: ceilometer
             subscriptionAddress: anycast/ceilometer/metering.sample
             debugEnabled: false
+          - collectorType: sensubility
+            debugEnabled: false
+            subscriptionAddress: sensubility/telemetry
+
       events:
         collectors:
           - collectorType: collectd

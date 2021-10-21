@@ -1,0 +1,8 @@
+namespace: external-secrets
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml
+  - crds
+  - rbac.yaml
+  - serviceaccount.yaml

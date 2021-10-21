@@ -1,0 +1,206 @@
+---
+# Source: external-secrets/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: nerc-external-secrets-controller
+  labels:
+    helm.sh/chart: external-secrets-0.3.6
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: nerc
+    app.kubernetes.io/version: "v0.3.6"
+    app.kubernetes.io/managed-by: Helm
+rules:
+  - apiGroups:
+    - "external-secrets.io"
+    resources:
+    - "secretstores"
+    - "clustersecretstores"
+    - "externalsecrets"
+    verbs:
+    - "get"
+    - "list"
+    - "watch"
+  - apiGroups:
+    - "external-secrets.io"
+    resources:
+    - "externalsecrets"
+    - "externalsecrets/status"
+    - "externalsecrets/finalizers"
+    verbs:
+    - "update"
+    - "patch"
+  - apiGroups:
+    - ""
+    resources:
+    - "serviceaccounts"
+    verbs:
+    - "get"
+    - "list"
+    - "watch"
+  - apiGroups:
+    - ""
+    resources:
+    - "configmaps"
+    verbs:
+    - "get"
+    - "list"
+    - "watch"
+  - apiGroups:
+    - ""
+    resources:
+    - "secrets"
+    verbs:
+    - "get"
+    - "list"
+    - "watch"
+    - "create"
+    - "update"
+    - "delete"
+    - "patch"
+  - apiGroups:
+    - ""
+    resources:
+    - "serviceaccounts/token"
+    verbs:
+    - "create"
+  - apiGroups:
+    - ""
+    resources:
+    - "events"
+    verbs:
+    - "create"
+    - "patch"
+---
+# Source: external-secrets/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: nerc-external-secrets-view
+  labels:
+    helm.sh/chart: external-secrets-0.3.6
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: nerc
+    app.kubernetes.io/version: "v0.3.6"
+    app.kubernetes.io/managed-by: Helm
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+rules:
+  - apiGroups:
+      - "external-secrets.io"
+    resources:
+      - "externalsecrets"
+      - "secretstores"
+      - "clustersecretstores"
+    verbs:
+      - "get"
+      - "watch"
+      - "list"
+---
+# Source: external-secrets/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: nerc-external-secrets-edit
+  labels:
+    helm.sh/chart: external-secrets-0.3.6
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: nerc
+    app.kubernetes.io/version: "v0.3.6"
+    app.kubernetes.io/managed-by: Helm
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+rules:
+  - apiGroups:
+      - "external-secrets.io"
+    resources:
+      - "externalsecrets"
+      - "secretstores"
+      - "clustersecretstores"
+    verbs:
+      - "create"
+      - "delete"
+      - "deletecollection"
+      - "patch"
+      - "update"
+---
+# Source: external-secrets/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: nerc-external-secrets-controller
+  labels:
+    helm.sh/chart: external-secrets-0.3.6
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: nerc
+    app.kubernetes.io/version: "v0.3.6"
+    app.kubernetes.io/managed-by: Helm
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: nerc-external-secrets-controller
+subjects:
+  - name: nerc-external-secrets
+    namespace: "external-secrets"
+    kind: ServiceAccount
+---
+# Source: external-secrets/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: nerc-external-secrets-leaderelection
+  namespace: "external-secrets"
+  labels:
+    helm.sh/chart: external-secrets-0.3.6
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: nerc
+    app.kubernetes.io/version: "v0.3.6"
+    app.kubernetes.io/managed-by: Helm
+rules:
+  - apiGroups:
+    - ""
+    resources:
+    - "configmaps"
+    resourceNames:
+    - "external-secrets-controller"
+    verbs:
+    - "get"
+    - "update"
+    - "patch"
+  - apiGroups:
+    - ""
+    resources:
+    - "configmaps"
+    verbs:
+    - "create"
+  - apiGroups:
+    - "coordination.k8s.io"
+    resources:
+    - "leases"
+    verbs:
+    - "get"
+    - "create"
+    - "update"
+    - "patch"
+---
+# Source: external-secrets/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: nerc-external-secrets-leaderelection
+  namespace: "external-secrets"
+  labels:
+    helm.sh/chart: external-secrets-0.3.6
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: nerc
+    app.kubernetes.io/version: "v0.3.6"
+    app.kubernetes.io/managed-by: Helm
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: nerc-external-secrets-leaderelection
+subjects:
+  - kind: ServiceAccount
+    name: nerc-external-secrets
+    namespace: "external-secrets"

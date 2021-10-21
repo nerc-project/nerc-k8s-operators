@@ -1,0 +1,33 @@
+---
+# Source: external-secrets/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nerc-external-secrets
+  namespace: "external-secrets"
+  labels:
+    helm.sh/chart: external-secrets-0.3.6
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: nerc
+    app.kubernetes.io/version: "v0.3.6"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: external-secrets
+      app.kubernetes.io/instance: nerc
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: external-secrets
+        app.kubernetes.io/instance: nerc
+    spec:
+      serviceAccountName: nerc-external-secrets
+      containers:
+        - name: external-secrets
+          image: "ghcr.io/external-secrets/external-secrets:v0.3.6"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              protocol: TCP

@@ -11,6 +11,9 @@ spec:
   groups:
     - name: ./openstack.rules
       rules:
-        - alert: Metric Listener down
+        - alert: Metric Listener Down
           expr: collectd_qpid_router_status < 1 
-
+        - alert: Ethernet Interface Receive Errors
+          expr: collectd_interface_if_errors_rx_total > 0
+        - alert: Ethernet Interface Transmit Errors
+          expr: collectd_interface_if_errors_tx_total > 0

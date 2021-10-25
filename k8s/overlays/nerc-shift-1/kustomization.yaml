@@ -5,4 +5,5 @@ resources:
   - external-secrets
   - ocs
   - stf
+  - postgres
   - keycloak

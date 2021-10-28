@@ -5,6 +5,17 @@ metadata:
   name: postgres-operator
 rules:
 - apiGroups:
+    - ''
+  resources:
+    - namespaces
+  verbs:
+    - get
+    - list
+    - watch
+    - create
+    - update
+    - delete
+- apiGroups:
   - ''
   resources:
   - configmaps

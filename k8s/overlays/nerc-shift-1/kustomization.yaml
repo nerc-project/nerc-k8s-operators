@@ -2,6 +2,7 @@ resources:
   - argocd
   - local-storage
   - vault
+  - external-secrets
   - ocs
   - stf
   - keycloak

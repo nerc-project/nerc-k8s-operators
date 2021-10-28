@@ -1,9 +1,9 @@
 resources:
   - argocd
   - local-storage
+  - ocs
   - vault
   - external-secrets
-  - ocs
   - stf
   - postgres
   - keycloak

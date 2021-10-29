@@ -1,5 +1,6 @@
 resources:
   - ../../../base/stf
+  - slack-url-secret.yaml
   - stf-object.yaml
   - dashboards
   - alerts

@@ -1,0 +1,11 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: karma-dashboard
+  namespace: service-telemetry
+spec:
+  to:
+    kind: Service
+    name: karma-dashboard-http
+  port:
+    targetPort: 8080

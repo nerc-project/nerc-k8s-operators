@@ -3,3 +3,4 @@ resources:
   - stf-object.yaml
   - dashboards
   - alerts
+  - karma-dashboard

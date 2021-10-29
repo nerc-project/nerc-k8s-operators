@@ -17,7 +17,7 @@ spec:
         - name: karma-dashboard
           image: ghcr.io/prymitive/karma:latest
           env:
-          - name: ALERTMANAGER_URI
-            value: https://alertmanager-operated:9093
+            - name: ALERTMANAGER_URI
+              value: https://alertmanager-operated:9093
           ports:
             - containerPort: 8080

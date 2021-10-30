@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karma-dashboard
+  namespace: service-telemetry
+spec:
+  selector:
+    matchLabels:
+      app: karma-dashboard
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: karma-dashboard
+    spec:
+      containers:
+        - name: karma-dashboard
+          image: ghcr.io/prymitive/karma:latest
+          env:
+            - name: ALERTMANAGER_URI
+              value: https://alertmanager-operated:9093
+          ports:
+            - containerPort: 8080

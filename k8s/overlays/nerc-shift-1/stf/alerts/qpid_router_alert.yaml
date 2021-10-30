@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: default
+    role: alert-rules
+  name: prometheus-alarm-rules
+  namespace: service-telemetry
+spec:
+  groups:
+    - name: ./openstack.rules
+      rules:
+        - alert: Metric Listener Down
+          expr: collectd_qpid_router_status < 1
+        - alert: Ethernet Interface Receive Errors
+          expr: increase(collectd_interface_if_errors_rx_total[1h]) > 0
+        - alert: Ethernet Interface Transmit Errors
+          expr: increase(collectd_interface_if_errors_tx_total[1h]) > 0

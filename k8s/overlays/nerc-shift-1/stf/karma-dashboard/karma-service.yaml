@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: karma-dashboard-http
+  namespace: service-telemetry
+spec:
+  selector:
+    app: karma-dasbhoard
+  ports:
+    - port: 8080
+      targetPort: 8080

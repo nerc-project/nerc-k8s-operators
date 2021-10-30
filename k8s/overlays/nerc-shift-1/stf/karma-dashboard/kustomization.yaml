@@ -1,0 +1,4 @@
+resources:
+  - karma-deployment.yaml
+  - karma-service.yaml
+  - karma-route.yaml

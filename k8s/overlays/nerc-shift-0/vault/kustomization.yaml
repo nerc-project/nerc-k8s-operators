@@ -1,0 +1,7 @@
+resources:
+  - ../../../base/vault
+  - clusterrolebindings
+  - securitycontextconstraints.yaml
+  - cr.yaml
+  - route.yaml
+  - persistentvolumeclaim.yaml

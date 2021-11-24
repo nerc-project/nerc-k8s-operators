@@ -1,0 +1,19 @@
+kind: SecurityContextConstraints
+apiVersion: v1
+metadata:
+  name: vault
+allowPrivilegedContainer: true
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+fsGroup:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+users:
+  - system:serviceaccount:vault:vault
+  - system:serviceaccount:vault:vault-operator
+  - system:serviceaccount:vault:builder
+  - system:serviceaccount:vault:deployer
+  - system:serviceaccount:vault:default

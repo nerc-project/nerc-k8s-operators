@@ -2,3 +2,6 @@ resources:
   - ../../../base/local-storage
   - localvolumediscovery.yaml
   - localvolumeset.yaml
+
+patchesStrategicMerge:
+  - patches/subscription.yaml

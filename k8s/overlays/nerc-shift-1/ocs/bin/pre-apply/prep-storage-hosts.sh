@@ -1,9 +1,10 @@
 #!/bin/bash
 
-COUNTDOWN=5
+COUNTDOWN=${COUNTDOWN:-5}
+CEPH_DISK=${CEPH_DISK:-null}
 
 function confirm() {
-  echo "!!! About to wipe data on ${1}:/dev/sdb and add ${1} to OCS"
+  echo "!!! About to wipe data on ${1}:${CEPH_DISK} and add ${1} to OCS"
   echo "!!! Are you 100% sure you wish to proceed?"
   echo "!!! Please type ${1} and press ENTER to confirm"
   echo
@@ -31,9 +32,9 @@ function countdown() {
 function wipe_disks() {
   oc debug --as-root=true "node/${1}" -- <<EOF
 set -x
-chroot /host wipefs -a /dev/sdb
-chroot /host sgdisk --zap /dev/sdb
-chroot /host dd if=/dev/zero of=/dev/sdb bs=1M count=10 conv=fsync
+chroot /host wipefs -a ${CEPH_DISK}
+chroot /host sgdisk --zap ${CEPH_DISK}
+chroot /host dd if=/dev/zero of=${CEPH_DISK} bs=1M count=10 conv=fsync
 EOF
 }
 
@@ -41,8 +42,14 @@ function enable_ocs_host() {
   oc patch node "${1}" -p '{"metadata": {"labels": {"cluster.ocs.openshift.io/openshift-storage": ""}}}'
 }
 
-for i in $(seq 0 2); do
-  node="os-ctl-${i}"
+if [ "${CEPH_DISK}" == 'null' ];
+then
+  echo "!!! Missing ceph data disk configuration" 1>&2
+  echo "!!! Please set the CEPH_DISK environment variable (e.g. CEPH_DISK=/dev/sdb)"1>&2
+  exit 1
+fi
+
+for node in $(oc get nodes -o name | sed 's:^node/::g'); do
   confirm $node
   countdown $node
   wipe_disks $node

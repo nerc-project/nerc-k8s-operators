@@ -1,4 +1,5 @@
 resources:
+  - oauth-github.yaml
   - argocd
   - local-storage
   - ocs

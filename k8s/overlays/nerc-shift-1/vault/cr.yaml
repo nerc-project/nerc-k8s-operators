@@ -135,6 +135,8 @@ spec:
           }
     auth:
       - type: kubernetes
+        config:
+          issuer: 'kubernetes/serviceaccount'
         roles:
           # Allow every pod in the default namespace to use the secret kv store
           - name: default

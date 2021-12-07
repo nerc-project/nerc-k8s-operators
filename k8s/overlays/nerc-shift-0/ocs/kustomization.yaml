@@ -1,0 +1,4 @@
+resources:
+  - ../../../base/ocs
+  - storagecluster.yaml
+  - storageclass.yaml

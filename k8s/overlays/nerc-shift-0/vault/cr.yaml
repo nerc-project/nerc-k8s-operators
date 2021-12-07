@@ -67,7 +67,7 @@ spec:
   # Specify threshold for renewing certificates. Valid time units are "ns", "us", "ms", "s", "m", "h".
   # tlsExpiryThreshold: 168h
   tlsAdditionalHosts:
-    - 'vault-vault.apps.nerc-shift-1.rc.fas.harvard.edu'
+    - 'vault-vault.apps.nerc-shift-0.rc.fas.harvard.edu'
 
   # Request an Ingress controller with the default configuration
   ingress:
@@ -135,8 +135,6 @@ spec:
           }
     auth:
       - type: kubernetes
-        config:
-          issuer: 'kubernetes/serviceaccount'
         roles:
           # Allow every pod in the default namespace to use the secret kv store
           - name: default

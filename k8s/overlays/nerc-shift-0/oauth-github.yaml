@@ -1,0 +1,44 @@
+---
+apiVersion: external-secrets.io/v1alpha1
+kind: ExternalSecret
+metadata:
+  name: nerc-shift-0-github-oauth
+  namespace: openshift-config
+spec:
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: vault-backend
+    kind: ClusterSecretStore
+  target:
+    name: nerc-shift-0-github-oauth
+  data:
+  - secretKey: clientSecret
+    remoteRef:
+      key: accounts/github/oauth
+      property: client_secret
+
+---
+apiVersion: v1
+items:
+- apiVersion: config.openshift.io/v1
+  kind: OAuth
+  metadata:
+    annotations:
+      release.openshift.io/create-only: "true"
+    name: cluster
+  spec:
+    identityProviders:
+    - github:
+        clientID: 4c768333f61be71dbeea
+        clientSecret:
+          name: nerc-shift-0-github-oauth
+        hostname: ""
+        organizations:
+        - nerc-project
+      mappingMethod: claim
+      name: github
+      type: GitHub
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

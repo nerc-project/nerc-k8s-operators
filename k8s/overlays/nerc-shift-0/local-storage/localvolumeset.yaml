@@ -1,0 +1,27 @@
+apiVersion: local.storage.openshift.io/v1alpha1
+kind: LocalVolumeSet
+metadata:
+  name: local-sdb
+  namespace: openshift-local-storage
+spec:
+  deviceInclusionSpec:
+    deviceTypes:
+      - disk
+      - part
+    minSize: 1Gi
+  nodeSelector:
+    nodeSelectorTerms:
+      - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+              - os-ctl-0
+              - os-ctl-1
+              - os-ctl-2
+  storageClassName: local-sdb
+  tolerations:
+    - effect: NoSchedule
+      key: node.ocs.openshift.io/storage
+      operator: Equal
+      value: 'true'
+  volumeMode: Block

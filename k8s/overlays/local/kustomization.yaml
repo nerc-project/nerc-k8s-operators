@@ -1,2 +1,23 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
 resources:
   - external-secrets
+  - ../../base/postgres
+  - ../../base/keycloak
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/source
+        value: operatorhubio-catalog
+    target:
+      kind: Subscription
+
+  - patch: |-
+      - op: replace
+        path: /spec/sourceNamespace
+        value: olm
+    target:
+      kind: Subscription

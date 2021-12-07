@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keepalived-check-for-haproxy
+data:
+  check-for-haproxy.sh: |
+    #!/bin/bash
+    netstat -ltunp | grep -qi 0.0.0.0:443

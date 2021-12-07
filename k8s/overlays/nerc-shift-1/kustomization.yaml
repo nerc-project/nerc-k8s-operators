@@ -3,6 +3,7 @@ resources:
   - argocd
   - local-storage
   - ocs
+  - openshift-monitoring
   - vault
   - external-secrets
   - postgres

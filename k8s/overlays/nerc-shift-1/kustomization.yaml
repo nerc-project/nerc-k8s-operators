@@ -1,10 +1,10 @@
 resources:
-  - oauth-github.yaml
   - argocd
   - local-storage
   - ocs
   - openshift-monitoring
   - vault
   - external-secrets
+  - oauth-github.yaml
   - postgres
   - keycloak

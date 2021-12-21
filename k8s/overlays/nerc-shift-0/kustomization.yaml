@@ -1,8 +1,8 @@
 resources:
-  - oauth-github.yaml
   - local-storage
   - ocs
   - openshift-monitoring
   - vault
   - external-secrets
+  - oauth-github.yaml
   - stf

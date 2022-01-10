@@ -7,9 +7,10 @@ metadata:
   namespace: service-telemetry
 spec:
   name: rhos-cloud-dashboard.json
-  plugins:
+  plugins: 
     - name: grafana-polystat-panel
       version: "1.2.2"
+  name: rhos-cloud-dashboard.json
   json: |
     {
       "annotations": {
@@ -512,10 +513,10 @@ spec:
             "colorMode": "none",
             "graphMode": "none",
             "justifyMode": "auto",
-            "orientation": "auto",
+            "orientation": "horizontal",
             "reduceOptions": {
               "calcs": [
-                "lastNotNull"
+                "mean"
               ],
               "fields": "",
               "values": false
@@ -539,7 +540,6 @@ spec:
               ],
               "exemplar": true,
               "expr": "avg(sensubility_container_health_status{process=\"neutron_api\", service=~\".+-$clouds-.+\"})",
-              "instant": false,
               "interval": "",
               "legendFormat": "",
               "metrics": [

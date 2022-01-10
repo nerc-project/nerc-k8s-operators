@@ -166,7 +166,7 @@ spec:
           ],
           "targets": [
             {
-              "expr": "ALERTS",
+              "expr": "ALERTS{alertstate!=\"pending\"}",
               "format": "table",
               "hide": false,
               "instant": true,
@@ -305,7 +305,7 @@ spec:
           ],
           "targets": [
             {
-              "expr": "ALERTS",
+              "expr": "ALERTS{alertstate!=\"pending\"}",
               "format": "table",
               "hide": false,
               "instant": false,

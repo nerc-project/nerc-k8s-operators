@@ -38,33 +38,6 @@ spec:
             storageSelector: {}
             storageClass: ocs-storagecluster-ceph-rbd
           retention: 24h
-  alertmanagerConfigManifest: |
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: 'alertmanager-default'
-      namespace: 'service-telemetry'
-    type: Opaque
-    stringData:
-      alertmanager.yaml: |-
-        global:
-          resolve_timeout: 10m
-          slack_api_url:
-            valueFrom:
-              secretKeyRef:
-                name: slack-url-secret
-                key: slack_api_url
-        route:
-          group_by: ['job']
-          group_wait: 30s
-          group_interval: 5m
-          repeat_interval: 12h
-          receiver: 'slack-notifications'
-        receivers:
-        - name: 'slack-notifications'
-          slack_configs:
-            - channel: '#p-nerc-alerts'
-              send_resolved: true
   graphing:
     enabled: true
     grafana:

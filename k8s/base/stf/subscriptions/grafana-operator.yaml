@@ -8,4 +8,4 @@ spec:
   installPlanApproval: Automatic
   name: grafana-operator
   source: operatorhubio-operators
-  sourceNamespace: service-telemetry
+  sourceNamespace: openshift-marketplace

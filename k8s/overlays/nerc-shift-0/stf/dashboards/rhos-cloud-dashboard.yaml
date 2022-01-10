@@ -10,7 +10,6 @@ spec:
   plugins: 
     - name: grafana-polystat-panel
       version: "1.2.2"
-  name: rhos-cloud-dashboard.json
   json: |
     {
       "annotations": {

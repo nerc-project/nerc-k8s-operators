@@ -1,0 +1,11 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: metrics-store
+  namespace: service-telemetry
+spec:
+  to:
+    kind: Service
+    name: prometheus-operated
+  port:
+    targetPort: 9090

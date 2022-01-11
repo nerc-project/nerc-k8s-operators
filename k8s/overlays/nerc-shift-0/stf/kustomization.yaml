@@ -2,6 +2,7 @@ resources:
   - ../../../base/stf
   - slack-url-secret.yaml
   - stf-object.yaml
+  - prometheus-route.yaml
   - dashboards
   - alerts
   - karma-dashboard

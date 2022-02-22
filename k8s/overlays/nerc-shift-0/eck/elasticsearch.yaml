@@ -6,16 +6,16 @@ metadata:
 spec:
   version: 7.17.0
   nodeSets:
-  - name: default
-    count: 1
-    config:
-      node.store.allow_mmap: false
-    volumeClaimTemplates:
-    - metadata:
-        name: elasticsearch-data
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 200Gi
+    - name: default
+      count: 1
+      config:
+        node.store.allow_mmap: false
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 200Gi

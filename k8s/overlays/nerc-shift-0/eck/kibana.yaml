@@ -1,0 +1,12 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: nerc-eck
+  namespace: nerc-eck
+spec:
+  version: 7.17.0
+  count: 1
+  elasticsearchRef:
+    name: nerc-eck
+  config:
+    server.publicBaseUrl: https://nerc-eck-nerc-eck.apps.aa-shift-dev1.nerc.rc.fas.harvard.edu

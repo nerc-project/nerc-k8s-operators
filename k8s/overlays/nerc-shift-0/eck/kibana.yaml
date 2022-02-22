@@ -9,4 +9,5 @@ spec:
   elasticsearchRef:
     name: nerc-eck
   config:
-    server.publicBaseUrl: https://kibana-nerc-eck.apps.nerc-shift-0.rc.fas.harvard.edu
+    server.publicBaseUrl:
+      https://kibana-nerc-eck.apps.nerc-shift-0.rc.fas.harvard.edu

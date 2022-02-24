@@ -1,0 +1,8 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: nerc-eck-operator-group
+  namespace: nerc-eck
+spec:
+  targetNamespaces:
+    - nerc-eck

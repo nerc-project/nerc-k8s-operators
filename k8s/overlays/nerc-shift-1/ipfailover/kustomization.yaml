@@ -1,6 +1,4 @@
-namespace: ipfailover
 resources:
-  - namespace.yaml
   - sa.yaml
   - scc.yaml
   - configmaps/keepalived-check-for-haproxy.yaml

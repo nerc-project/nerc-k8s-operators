@@ -1,0 +1,4 @@
+resources:
+  - os-ctl-0-pub-iface.yaml
+  - os-ctl-1-pub-iface.yaml
+  - os-ctl-2-pub-iface.yaml

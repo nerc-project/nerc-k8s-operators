@@ -1,4 +1,6 @@
 resources:
+  - ../../../base/nmstate
+  - nncp
   - sa.yaml
   - scc.yaml
   - configmaps/keepalived-check-for-haproxy.yaml

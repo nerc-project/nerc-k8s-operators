@@ -1,0 +1,14 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+    operators.coreos.com/kubernetes-nmstate-operator.openshift-nmstate: ""
+  name: kubernetes-nmstate-operator
+  namespace: openshift-nmstate
+spec:
+  channel: "4.8"
+  installPlanApproval: Automatic
+  name: kubernetes-nmstate-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: kubernetes-nmstate-operator.4.8.0-202202152218

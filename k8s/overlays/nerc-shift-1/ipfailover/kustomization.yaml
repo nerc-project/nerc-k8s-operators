@@ -1,6 +1,7 @@
 resources:
   - ../../../base/nmstate
   - nncp
+  - machineconfigs/99-pub-net-routes-rules.yaml
   - sa.yaml
   - scc.yaml
   - configmaps/keepalived-check-for-haproxy.yaml

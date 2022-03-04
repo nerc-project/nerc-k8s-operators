@@ -1,4 +1,5 @@
 resources:
+  - ipfailover
   - argocd
   - local-storage
   - ocs

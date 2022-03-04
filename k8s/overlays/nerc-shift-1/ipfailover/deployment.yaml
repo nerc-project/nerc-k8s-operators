@@ -21,7 +21,7 @@ spec:
       privileged: true
       hostNetwork: true
       nodeSelector:
-        node-role.kubernetes.io/worker: ""
+        node-role.kubernetes.io/master: ""
       containers:
       - name: openshift-ipfailover
         image: quay.io/openshift/origin-keepalived-ipfailover

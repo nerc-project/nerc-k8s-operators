@@ -1,0 +1,21 @@
+apiVersion: nmstate.io/v1beta1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: os-ctl-2-pub-iface
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: os-ctl-2
+  desiredState:
+    interfaces:
+    - name: bond0.2142
+      type: vlan
+      state: up
+      ipv4:
+        enabled: true
+        dhcp: false
+        address:
+          - ip: 140.247.152.12
+            prefix-length: 24
+      vlan:
+        base-iface: bond0
+        id: 2142

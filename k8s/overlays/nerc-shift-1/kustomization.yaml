@@ -8,3 +8,4 @@ resources:
   - oauth-github.yaml
   - postgres
   - keycloak
+  - cert-manager

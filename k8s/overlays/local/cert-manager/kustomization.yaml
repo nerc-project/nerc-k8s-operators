@@ -1,5 +1,3 @@
 resources:
   - ../../../base/cert-manager
   - staging-issuer.yaml
-
-

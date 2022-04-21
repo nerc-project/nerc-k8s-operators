@@ -2,7 +2,11 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: keepalived-check-for-haproxy
+  namespace: default
 data:
   check-for-haproxy.sh: |
     #!/bin/bash
+    set -e
     netstat -ltunp | grep -qi 0.0.0.0:443
+    _IP=$(ip addr show dev bond0.2142 | grep -iE '^\s+inet ' | head -1 | awk '{print $2}' | sed -r 's:/[[:digit:]]{2}$::g')
+    [ "$(curl -k -s -o /dev/null -I -w "%{http_code}" https://${_IP}:1936/healthz)" == "200" ]

@@ -1,0 +1,6 @@
+resources:
+  - ../../../base/eck
+  - elasticsearch.yaml
+  - elasticsearch-route.yaml
+  - kibana.yaml
+  - kibana-route.yaml

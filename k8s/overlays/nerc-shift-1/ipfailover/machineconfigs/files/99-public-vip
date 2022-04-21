@@ -1,0 +1,28 @@
+#!/bin/sh
+# This is a NetworkManager dispatcher / networkd-dispatcher script to setup
+# public VIP route table
+
+export LC_ALL=C
+
+# For NetworkManager consider only up/down events
+#[ $# -ge 2 ] && [ "$2" != "up" ] && [ "$2" != "down" ] && exit 0
+
+TUN_DEV=tun0
+
+while ! ip addr show dev $TUN_DEV |& grep -q inet; do
+  echo "waiting for $TUN_DEV to come up..."
+  sleep 5
+done
+
+if [ "$1" == "bond0.2142" ]; then
+  if [ "$2" == "up" ]; then
+    ip route add default via 140.247.152.1 dev bond0.2142 table 200
+    ip route add 10.128.0.0/14 dev tun0 table 200
+    ip rule add from 140.247.152.15 lookup pub
+  else
+    ip rule del from 140.247.152.15 lookup pub
+    ip route flush table 200
+  fi
+fi
+
+exit 0

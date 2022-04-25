@@ -1,6 +1,5 @@
 ---
 resources:
   - namespace.yaml
-  - secrets.yaml
   - operatorgroup.yaml
   - subscription.yaml

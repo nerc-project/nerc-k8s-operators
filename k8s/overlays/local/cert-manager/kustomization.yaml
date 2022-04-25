@@ -1,3 +1,4 @@
 resources:
   - ../../../base/cert-manager
+  - secrets.yaml
   - staging-issuer.yaml

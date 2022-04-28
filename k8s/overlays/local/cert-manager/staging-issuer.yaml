@@ -1,0 +1,29 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    # The ACME server URL
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    # Email address used for ACME registration
+    email: culbertj@mghpcc.org
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    # Enable the HTTP-01 challenge provider
+    solvers:
+    - selector:
+        dnsZones:
+          - "mss.mghpcc.org"
+      dns01:
+        route53:
+          region: us-east-1
+          # *.mss.mghpcc.org
+          hostedZoneID: Z08110181XP7CNWKKKIE0
+          # Key ID for mss-mghpcc-acme-r53 user
+          accessKeyID: AKIAZCA5WQJYT34P3U77
+          # Secret for mss-mghpcc-acme-r53 user
+          secretAccessKeySecretRef:
+            name: mss-route53-credentials
+            key: AWS_SECRET_ACCESS_KEY

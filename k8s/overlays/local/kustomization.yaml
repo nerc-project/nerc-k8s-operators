@@ -4,10 +4,12 @@ kind: Kustomization
 
 resources:
   - external-secrets
+  - cert-manager
   - ../../base/postgres
   - ../../base/keycloak
 
 patches:
+  # Use CatalogSource from minikube
   - patch: |-
       - op: replace
         path: /spec/source
@@ -21,3 +23,12 @@ patches:
         value: olm
     target:
       kind: Subscription
+
+  # Patch broken channel (stable is not available in quay.io)
+  - patch: |-
+      - op: replace
+        path: /spec/channel
+        value: candidate
+    target:
+      kind: Subscription
+      name: cert-manager

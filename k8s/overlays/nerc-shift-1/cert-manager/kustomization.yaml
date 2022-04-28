@@ -1,0 +1,4 @@
+resources:
+  - ../../../base/cert-manager
+  - secrets.yaml
+  - production-issuer.yaml

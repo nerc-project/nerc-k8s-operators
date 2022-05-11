@@ -7,9 +7,18 @@ spec:
   version: 7.17.0
   nodeSets:
     - name: default
-      count: 10
+      count: 3
       config:
         node.store.allow_mmap: true
+      podTemplate:
+        spec:
+          containers:
+            - name: elasticsearch
+              resources:
+                requests:
+                  memory: 4Gi
+                limits:
+                  memory: 4Gi
       volumeClaimTemplates:
         - metadata:
             name: elasticsearch-data
@@ -18,4 +27,4 @@ spec:
               - ReadWriteOnce
             resources:
               requests:
-                storage: 500Gi
+                storage: 150Gi

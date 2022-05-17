@@ -1,0 +1,22 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: master
+  name: 99-pub-net-routes-and-rules
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+        - path: /etc/iproute2/rt_tables
+          mode: 420
+          overwrite: true
+          contents:
+            source: data:text/plain;charset=utf-8;base64,IwojIHJlc2VydmVkIHZhbHVlcwojCjI1NSAgICAgbG9jYWwKMjU0ICAgICBtYWluCjI1MyAgICAgZGVmYXVsdAowICAgICAgIHVuc3BlYwojCiMgbG9jYWwKIwoyMDAgICAgIHB1Ygo=
+        - path: /etc/NetworkManager/dispatcher.d/99-public-vip
+          mode: 493
+          overwrite: true
+          contents:
+            source: data:text/plain;charset=utf-8;base64,IyEvYmluL3NoCiMgVGhpcyBpcyBhIE5ldHdvcmtNYW5hZ2VyIGRpc3BhdGNoZXIgLyBuZXR3b3JrZC1kaXNwYXRjaGVyIHNjcmlwdCB0byBzZXR1cAojIHB1YmxpYyBWSVAgcm91dGUgdGFibGUKCmV4cG9ydCBMQ19BTEw9QwoKIyBGb3IgTmV0d29ya01hbmFnZXIgY29uc2lkZXIgb25seSB1cC9kb3duIGV2ZW50cwojWyAkIyAtZ2UgMiBdICYmIFsgIiQyIiAhPSAidXAiIF0gJiYgWyAiJDIiICE9ICJkb3duIiBdICYmIGV4aXQgMAoKVFVOX0RFVj10dW4wCgp3aGlsZSAhIGlwIGFkZHIgc2hvdyBkZXYgJFRVTl9ERVYgfCYgZ3JlcCAtcSBpbmV0OyBkbwogIGVjaG8gIndhaXRpbmcgZm9yICRUVU5fREVWIHRvIGNvbWUgdXAuLi4iCiAgc2xlZXAgNQpkb25lCgppZiBbICIkMSIgPT0gImJvbmQwLjIxODAiIF07IHRoZW4KICBpZiBbICIkMiIgPT0gInVwIiBdOyB0aGVuCiAgICBpcCByb3V0ZSBhZGQgZGVmYXVsdCB2aWEgMTk5Ljk0LjYxLjEgZGV2IGJvbmQwLjIxODAgdGFibGUgMjAwCiAgICBpcCByb3V0ZSBhZGQgMTAuMTI4LjAuMC8xNCBkZXYgdHVuMCB0YWJsZSAyMDAKICAgIGlwIHJ1bGUgYWRkIGZyb20gMTk5Ljk0LjYxLjUgbG9va3VwIHB1YgogICAgaXAgcnVsZSBhZGQgZnJvbSAxOTkuOTQuNjEuNiBsb29rdXAgcHViCiAgZWxzZQogICAgaXAgcnVsZSBkZWwgZnJvbSAxOTkuOTQuNjEuNSBsb29rdXAgcHViCiAgICBpcCBydWxlIGRlbCBmcm9tIDE5OS45NC42MS42IGxvb2t1cCBwdWIKICAgIGlwIHJvdXRlIGZsdXNoIHRhYmxlIDIwMAogIGZpCmZpCgpleGl0IDAK

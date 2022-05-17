@@ -1,0 +1,19 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: ctl-2-storage-iface
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: ctl-2
+  desiredState:
+    interfaces:
+    - name: bond0.2173
+      type: vlan
+      state: up
+      ipv4:
+        enabled: true
+        dhcp: true
+      vlan:
+        base-iface: bond0
+        id: 2173
+      mtu: 9000

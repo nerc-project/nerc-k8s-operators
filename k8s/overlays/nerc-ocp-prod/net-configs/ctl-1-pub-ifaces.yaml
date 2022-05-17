@@ -1,0 +1,19 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: ctl-1-pub-ifaces
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: ctl-1
+  desiredState:
+    interfaces:
+    - name: bond0.2180
+      type: vlan
+      state: up
+      ipv4:
+        enabled: true
+        dhcp: true
+      vlan:
+        base-iface: bond0
+        id: 2180
+      mtu: 1500

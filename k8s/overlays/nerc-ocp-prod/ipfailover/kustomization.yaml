@@ -1,0 +1,5 @@
+resources:
+  - sa.yaml
+  - scc.yaml
+  - configmaps/keepalived-check-for-haproxy.yaml
+  - deployment.yaml

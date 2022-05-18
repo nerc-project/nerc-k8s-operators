@@ -6,3 +6,4 @@ resources:
   - external-secrets
   - oauth-github.yaml
   - stf
+  - image-registry

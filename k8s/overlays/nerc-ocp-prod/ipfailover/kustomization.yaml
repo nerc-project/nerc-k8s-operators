@@ -1,4 +1,5 @@
 resources:
+  - ingresscontroller.yaml
   - sa.yaml
   - scc.yaml
   - configmaps/keepalived-check-for-haproxy.yaml

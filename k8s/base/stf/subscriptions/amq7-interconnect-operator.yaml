@@ -1,11 +1,11 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
-  name: service-telemetry-operator
+  name: amq7-interconnect-operator
   namespace: service-telemetry
 spec:
-  channel: stable-1.4
+  channel: 1.10.x
   installPlanApproval: Automatic
-  name: service-telemetry-operator
+  name: amq7-interconnect-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace

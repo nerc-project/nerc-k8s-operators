@@ -11,7 +11,6 @@ spec:
         strategy: persistent
         persistent:
           pvcStorageRequest: 200G
-          storageSelector: {}
           storageClass: ocs-storagecluster-ceph-rbd
         receivers:
           snmpTraps:
@@ -25,7 +24,6 @@ spec:
           strategy: persistent
           persistent:
             pvcStorageRequest: 200Gi
-            storageSelector: {}
             storageClass: ocs-storagecluster-ceph-rbd
     metrics:
       prometheus:
@@ -35,7 +33,6 @@ spec:
           strategy: persistent
           persistent:
             pvcStorageRequest: 200G
-            storageSelector: {}
             storageClass: ocs-storagecluster-ceph-rbd
           retention: 24h
   alertmanagerConfigManifest: |
@@ -80,7 +77,7 @@ spec:
       web:
         enabled: false
   clouds:
-    - name: nerc-overcloud
+    - name: nerc
       metrics:
         collectors:
           - collectorType: collectd

@@ -2,3 +2,5 @@ resources:
   - rhos-dashboard.yaml
   - rhos-cloud-dashboard.yaml
   - rhos-cloudevents-dashboard.yaml
+  - virtual-machine-view.yaml
+  - memcached-dashboard.yaml

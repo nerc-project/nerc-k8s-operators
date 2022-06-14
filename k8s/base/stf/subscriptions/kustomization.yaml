@@ -1,5 +1,7 @@
 resources:
   - amq7-cert-manager-operator.yaml
+  - amq7-interconnect-operator.yaml
+  - prometheus-operator.yaml
   - elasticsearch-eck-operator-certified.yaml
   - grafana-operator.yaml
   - service-telemetry-operator.yaml

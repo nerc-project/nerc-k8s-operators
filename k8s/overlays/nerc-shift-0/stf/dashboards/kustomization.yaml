@@ -4,4 +4,3 @@ resources:
   - rhos-cloudevents-dashboard.yaml
   - virtual-machine-view.yaml
   - memcached-dashboard.yaml
-

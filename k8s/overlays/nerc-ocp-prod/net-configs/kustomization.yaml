@@ -1,0 +1,12 @@
+resources:
+  - ../../../base/nmstate
+  - machineconfigs/99-pub-net-routes-rules.yaml
+  - ctl-0-bond.yaml
+  - ctl-1-bond.yaml
+  - ctl-2-bond.yaml
+  - ctl-0-pub-ifaces.yaml
+  - ctl-1-pub-ifaces.yaml
+  - ctl-2-pub-ifaces.yaml
+  - ctl-0-storage-iface.yaml
+  - ctl-1-storage-iface.yaml
+  - ctl-2-storage-iface.yaml

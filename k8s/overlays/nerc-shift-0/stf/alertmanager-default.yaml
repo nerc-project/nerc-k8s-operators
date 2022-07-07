@@ -1,16 +1,16 @@
 apiVersion: external-secrets.io/v1alpha1
 kind: ExternalSecret
 metadata:
-  name: slack-url-secret
+  name: alertmanager-default
 spec:
   refreshInterval: "15s"
   secretStoreRef:
     name: vault-backend
     kind: ClusterSecretStore
   target:
-    name: slack-url-secret
+    name: alertmanager-default
   data:
-    - secretKey: slack_api_url
+    - secretKey: alertmanager.yaml
       remoteRef:
         key: stf
-        property: SLACK_API_URL
+        property: ALERTMANAGER_YML

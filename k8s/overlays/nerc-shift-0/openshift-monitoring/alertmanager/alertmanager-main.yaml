@@ -2,6 +2,7 @@ apiVersion: external-secrets.io/v1alpha1
 kind: ExternalSecret
 metadata:
   name: alertmanager-main
+  namespace: openshift-monitoring
 spec:
   refreshInterval: "15s"
   secretStoreRef:

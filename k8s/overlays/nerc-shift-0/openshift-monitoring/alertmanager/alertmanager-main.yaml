@@ -13,5 +13,5 @@ spec:
   data:
     - secretKey: alertmanager.yaml
       remoteRef:
-        key: nerc-shift-0-monitoring
-        property: ALERTMANAGER_YML
+        key: openshift-monitoring
+        property: alertmanager.yaml

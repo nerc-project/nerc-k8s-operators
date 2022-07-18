@@ -10,8 +10,8 @@ spec:
   groups:
     - name: ./openstack.rules
       rules:
-        - alert: Metric Listener Down
-          expr: collectd_qpid_router_status < 1
+        - alert: Collectd metrics receive rate is zero
+          expr: rate(sg_total_collectd_msg_received_count[1m]) == 0
         - alert: Ethernet Interface Receive Errors
           expr: increase(collectd_interface_if_errors_rx_total[1h]) > 0
         - alert: Ethernet Interface Transmit Errors

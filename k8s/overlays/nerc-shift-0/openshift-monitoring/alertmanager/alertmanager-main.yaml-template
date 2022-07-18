@@ -78,4 +78,3 @@ route:
         severity: critical
       receiver: Critical
       repeat_interval: 1h
-

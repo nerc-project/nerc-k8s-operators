@@ -24,7 +24,7 @@ receivers:
     slack_configs:
       - channel: p-nerc-alerts
         api_url: >-
-	  SLACK_API_URL
+          SLACK_API_URL
         send_resolved: true
         username: '{{ template "slack.default.username" . }} - nerc-shift-0'
         title: '[{{ .Status | toUpper -}}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{- end -}}]'

@@ -34,7 +34,7 @@ spec:
           persistent:
             pvcStorageRequest: 200G
             storageClass: ocs-storagecluster-ceph-rbd
-          retention: 24h
+          retention: 7d
   graphing:
     enabled: true
     grafana:

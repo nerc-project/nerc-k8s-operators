@@ -2,7 +2,7 @@
 ## update SLACK_API_URL and paste
 ## content bellow into openshift-monitoring/alertmanager.yaml
 ###############################################
-global:
+#global:
   resolve_timeout: 5m
 inhibit_rules:
   - equal:
@@ -30,17 +30,22 @@ receivers:
         title: '[{{ .Status | toUpper -}}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{- end -}}]'
         title_link: 'https://console-openshift-console.apps.nerc-shift-0.rc.fas.harvard.edu/monitoring/alerts'
         text: |-
+          {{ if .CommonLabels.namespace -}}
+          *Namespace:* {{ .CommonLabels.namespace }}
+          {{- end }}
           {{ range .Alerts }}
           --------------------------------------------
           *Cluster* <https://console-openshift-console.apps.nerc-shift-0.rc.fas.harvard.edu/monitoring/alerts|nerc-shift-0>
           *Severity* `{{ .Labels.severity }}`
           *Alert:* <https://console-openshift-console.apps.nerc-shift-0.rc.fas.harvard.edu/monitoring/alerts|`{{ .Labels.alertname }}`>
-          *Since:* `{{ .StartsAt }}`
+          *Since:* `{{ .StartsAt.Local.Format "Mon, 02 Jan 2006 15:04:05 EST" }}`
           {{ if .Annotations.message -}}
           *Message:* ```{{ .Annotations.message }}```
           {{- end }}
+          {{ if  .Annotations.description -}}
+          *Description:* ``` {{ .Annotations.description }}```
+          {{- end }}
           {{ end }}
-
   - name: Default
     slack_configs:
       - channel: p-nerc-alerts
@@ -51,17 +56,22 @@ receivers:
         title: '[{{ .Status | toUpper -}}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{- end -}}]'
         title_link: 'https://console-openshift-console.apps.nerc-shift-0.rc.fas.harvard.edu/monitoring/alerts'
         text: |-
+          {{ if .CommonLabels.namespace -}}
+          *Namespace:* {{ .CommonLabels.namespace }}
+          {{- end }}
           {{ range .Alerts }}
           --------------------------------------------
           *Severity* `{{ .Labels.severity }}`
           *Alert:* <https://console-openshift-console.apps.nerc-shift-0.rc.fas.harvard.edu/monitoring/alerts|`{{ .Labels.alertname }}`>
           *Cluster* <https://console-openshift-console.apps.nerc-shift-0.rc.fas.harvard.edu/monitoring/alerts|nerc-shift-0>
-          *Since:* `{{ .StartsAt }}`
+          *Since:* `{{ .StartsAt.Local.Format "Mon, 02 Jan 2006 15:04:05 EST" }}`
           {{ if .Annotations.message -}}
           *Message:* ```{{ .Annotations.message }}```
           {{- end }}
+          {{ if  .Annotations.description -}}
+          *Description:* ``` {{ .Annotations.description }}```
+          {{- end }}
           {{ end }}
-
   - name: Watchdog
 route:
   group_by:
@@ -73,6 +83,9 @@ route:
   routes:
     - match:
         alertname: Watchdog
+      receiver: Watchdog
+    - match:
+        severity: info
       receiver: Watchdog
     - match:
         severity: critical

@@ -10,3 +10,4 @@ resources:
   - postgres
   - keycloak
   - cert-manager
+  - kubelet

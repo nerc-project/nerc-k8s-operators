@@ -2,7 +2,7 @@
 ## update SLACK_API_URL and paste
 ## content bellow into openshift-monitoring/alertmanager.yaml
 ###############################################
-#global:
+global:
   resolve_timeout: 5m
 inhibit_rules:
   - equal:

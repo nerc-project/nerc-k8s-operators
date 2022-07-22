@@ -1,0 +1,93 @@
+## this is a template for vault secret
+## update SLACK_API_URL and paste
+## content bellow into openshift-monitoring/alertmanager.yaml
+###############################################
+global:
+  resolve_timeout: 5m
+inhibit_rules:
+  - equal:
+      - namespace
+      - alertname
+    source_match:
+      severity: critical
+    target_match_re:
+      severity: warning|info
+  - equal:
+      - namespace
+      - alertname
+    source_match:
+      severity: warning
+    target_match_re:
+      severity: info
+receivers:
+  - name: Critical
+    slack_configs:
+      - channel: p-nerc-alerts
+        api_url: >-
+          SLACK_API_URL
+        send_resolved: true
+        username: '{{ template "slack.default.username" . }} - nerc-shift-0'
+        title: '[{{ .Status | toUpper -}}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{- end -}}]'
+        title_link: 'https://console-openshift-console.apps.nerc-shift-0.rc.fas.harvard.edu/monitoring/alerts'
+        text: |-
+          {{ if .CommonLabels.namespace -}}
+          *Namespace:* {{ .CommonLabels.namespace }}
+          {{- end }}
+          {{ range .Alerts }}
+          --------------------------------------------
+          *Severity* `{{ .Labels.severity }}` *Status* `{{ .Status | toUpper }}`
+          *Alert:* <https://console-openshift-console.apps.nerc-shift-0.rc.fas.harvard.edu/monitoring/alerts|`{{ .Labels.alertname }}`>
+          *Cluster* <https://console-openshift-console.apps.nerc-shift-0.rc.fas.harvard.edu/monitoring/alerts|nerc-shift-0>
+          *Since:* `{{ .StartsAt.Local.Format "Mon, 02 Jan 2006 15:04:05 EST" }}`
+          {{ if .Annotations.message -}}
+          *Message:* ```{{ .Annotations.message }}```
+          {{- end }}
+          {{ if  .Annotations.description -}}
+          *Description:* ``` {{ .Annotations.description }}```
+          {{- end }}
+          {{ end }}
+  - name: Default
+    slack_configs:
+      - channel: p-nerc-alerts
+        api_url: >-
+          SLACK_API_URL
+        send_resolved: true
+        username: '{{ template "slack.default.username" . }} - nerc-shift-0'
+        title: '[{{ .Status | toUpper -}}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{- end -}}]'
+        title_link: 'https://console-openshift-console.apps.nerc-shift-0.rc.fas.harvard.edu/monitoring/alerts'
+        text: |-
+          {{ if .CommonLabels.namespace -}}
+          *Namespace:* {{ .CommonLabels.namespace }}
+          {{- end }}
+          {{ range .Alerts }}
+          --------------------------------------------
+          *Severity* `{{ .Labels.severity }}` *Status* `{{ .Status | toUpper }}`
+          *Alert:* <https://console-openshift-console.apps.nerc-shift-0.rc.fas.harvard.edu/monitoring/alerts|`{{ .Labels.alertname }}`>
+          *Cluster* <https://console-openshift-console.apps.nerc-shift-0.rc.fas.harvard.edu/monitoring/alerts|nerc-shift-0>
+          *Since:* `{{ .StartsAt.Local.Format "Mon, 02 Jan 2006 15:04:05 EST" }}`
+          {{ if .Annotations.message -}}
+          *Message:* ```{{ .Annotations.message }}```
+          {{- end }}
+          {{ if  .Annotations.description -}}
+          *Description:* ``` {{ .Annotations.description }}```
+          {{- end }}
+          {{ end }}
+  - name: Watchdog
+route:
+  group_by:
+    - namespace
+  group_interval: 5m
+  group_wait: 30s
+  receiver: Default
+  repeat_interval: 24h
+  routes:
+    - match:
+        alertname: Watchdog
+      receiver: Watchdog
+    - match:
+        severity: info
+      receiver: Watchdog
+    - match:
+        severity: critical
+      receiver: Critical
+      repeat_interval: 1h

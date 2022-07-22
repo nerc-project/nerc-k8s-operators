@@ -1,3 +1,4 @@
 resources:
   - configmaps/cluster-monitoring-config.yaml
   - configmaps/user-workload-monitoring-config.yaml
+  - alertmanager/alertmanager-main.yaml

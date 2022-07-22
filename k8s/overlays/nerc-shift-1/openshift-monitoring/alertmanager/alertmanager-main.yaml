@@ -1,0 +1,17 @@
+apiVersion: external-secrets.io/v1alpha1
+kind: ExternalSecret
+metadata:
+  name: alertmanager-main
+  namespace: openshift-monitoring
+spec:
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: vault-backend
+    kind: ClusterSecretStore
+  target:
+    name: alertmanager-main
+  data:
+    - secretKey: alertmanager.yaml
+      remoteRef:
+        key: openshift-monitoring
+        property: alertmanager.yaml

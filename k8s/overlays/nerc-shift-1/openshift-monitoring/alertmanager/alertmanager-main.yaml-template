@@ -34,7 +34,7 @@ receivers:
           {{- end }}
           {{ range .Alerts }}
           --------------------------------------------
-          *Severity* `{{ .Labels.severity }}` *Status* `{{ .Status |to Upper }}
+          *Severity* `{{ .Labels.severity }}` *Status* `{{ .Status | toUpper }}
           *Alert:* <https://console-openshift-console.apps.nerc-shift-1.rc.fas.harvard.edu/monitoring/alerts|`{{ .Labels.alertname }}`>
           *Cluster* <https://console-openshift-console.apps.nerc-shift-1.rc.fas.harvard.edu/monitoring/alerts|nerc-shift-1>
           *Since:* `{{ .StartsAt.Local.Format "Mon, 02 Jan 2006 15:04:05 EST" }}`

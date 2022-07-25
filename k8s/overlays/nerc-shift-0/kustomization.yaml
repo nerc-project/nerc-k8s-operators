@@ -7,3 +7,4 @@ resources:
   - oauth-github.yaml
   - stf
   - image-registry
+  - kubelet

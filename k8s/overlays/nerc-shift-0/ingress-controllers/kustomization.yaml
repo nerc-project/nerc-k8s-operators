@@ -1,0 +1,7 @@
+---
+resources:
+  - ../../../base/ingress-controllers
+  - secrets/default-ingress-certificate.yaml
+
+patches:
+  - path: patches/default.yaml

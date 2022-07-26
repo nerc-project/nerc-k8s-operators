@@ -11,3 +11,4 @@ resources:
   - keycloak
   - cert-manager
   - kubelet
+  - ingress-controllers

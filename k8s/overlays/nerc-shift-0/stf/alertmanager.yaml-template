@@ -4,16 +4,27 @@
 ###############################################
 global:
   resolve_timeout: 10m
-  slack_api_url: SLACK_API_URL
+  slack_api_url: "SLACK_API_URL"
 route:
   group_by: ['job']
   group_wait: 30s
   group_interval: 5m
-  repeat_interval: 6h
+  repeat_interval: 24h
   receiver: 'slack'
 receivers:
 - name: 'slack'
   slack_configs:
-  - channel: #aa-test
+  - channel: p-nerc-alerts
     send_resolved: true
     username: 'STF {{ template "slack.default.username" . }}'
+    title: '[{{ .Status | toUpper -}}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{- end -}}]'
+    title_link: 'https://default-alertmanager-proxy-service-telemetry.apps.nerc-shift-0.rc.fas.harvard.edu/#/alerts'
+    text: |-
+      {{ range .Alerts }}
+      {{ if gt (len .Labels) 0 -}}
+      {{ range .Labels.SortedPairs }}
+      {{ .Name }} = ` {{ .Value }}`
+      {{ end }}
+      -------------------------------
+      {{- end }}
+      {{ end }}

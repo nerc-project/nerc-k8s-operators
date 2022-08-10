@@ -7,3 +7,4 @@ spec:
   name: keycloak-operator
   source: operatorhubio-operators
   sourceNamespace: openshift-marketplace
+  installPlanApproval: Manual

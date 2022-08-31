@@ -6,6 +6,14 @@ metadata:
 data:
   config.yaml: |
     alertmanagerMain:
+      retention: 2w
+      volumeClaimTemplate:
+        spec:
+          resources:
+            requests:
+              storage: 50Gi
+    prometheusK8s:
+      retention: 2w
       volumeClaimTemplate:
         spec:
           resources:

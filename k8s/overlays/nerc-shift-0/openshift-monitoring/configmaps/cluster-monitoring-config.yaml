@@ -11,3 +11,9 @@ data:
           resources:
             requests:
               storage: 50Gi
+    prometheusK8s:
+      volumeClaimTemplate:
+        spec:
+          resources:
+            requests:
+              storage: 50Gi

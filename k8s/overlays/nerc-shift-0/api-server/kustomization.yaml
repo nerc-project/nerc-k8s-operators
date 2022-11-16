@@ -1,0 +1,7 @@
+---
+resources:
+  - ../../../base/api-server
+  - secrets/default-api-server-certificate.yaml
+
+patches:
+  - path: patches/default.yaml

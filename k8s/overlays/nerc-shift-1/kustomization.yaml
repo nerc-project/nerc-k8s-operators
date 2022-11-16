@@ -12,3 +12,4 @@ resources:
   - cert-manager
   - kubelet
   - ingress-controllers
+  - api-server

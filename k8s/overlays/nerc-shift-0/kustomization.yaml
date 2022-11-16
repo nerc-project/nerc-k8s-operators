@@ -9,3 +9,4 @@ resources:
   - image-registry
   - kubelet
   - ingress-controllers
+  - api-server

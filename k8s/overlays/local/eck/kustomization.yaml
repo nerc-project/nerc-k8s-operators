@@ -1,6 +1,10 @@
 resources:
-  - ../../../base/eck
-  - elasticsearch.yaml
-  - elasticsearch-route.yaml
-  - kibana.yaml
-  - kibana-route.yaml
+ - ../../../base/eck
+ - elastic.yaml
+ - elastic-route.yaml
+ - kibana.yaml
+ - kibana-route.yaml
+ - fleet.yaml
+ - fleet-route.yaml
+ - elastic-agent.yaml
+ - rolesnbindings.yaml

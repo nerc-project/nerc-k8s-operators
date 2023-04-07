@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Route
 metadata:
-  name: eck-kibana
+  name: eck-fleet
   namespace: nerceckdeployment
 spec:
   tls:
@@ -9,4 +9,4 @@ spec:
     insecureEdgeTerminationPolicy: Redirect
   to:
     kind: Service
-    name: eck-kibana-kb-http
+    name: eck-fleet-agent-http

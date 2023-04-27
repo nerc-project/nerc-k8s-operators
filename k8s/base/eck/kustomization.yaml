@@ -1,4 +1,8 @@
+kind: Kustomization
 resources:
-  - namespace.yaml
-  - operatorgroup.yaml
-  - subscription.yaml
+ - namespace.yaml
+ - operatorgroup.yaml
+ - subscription.yaml
+ - crds.yaml
+ - operator.yaml
+ - namespace-deployment.yaml

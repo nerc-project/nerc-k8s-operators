@@ -2,7 +2,7 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: eck-elastic
-  namespace: nerceckdeployment
+  namespace: nerceckdev1
 spec:
   tls:
     termination: passthrough # Elasticsearch is the TLS endpoint

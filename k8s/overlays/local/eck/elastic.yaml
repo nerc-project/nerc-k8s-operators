@@ -2,7 +2,7 @@ apiVersion: elasticsearch.k8s.elastic.co/v1
 kind: Elasticsearch
 metadata:
   name: eck-elastic
-  namespace: nerceckdeployment
+  namespace: nerceckdev1
 spec:
   version: 8.6.2
   nodeSets:
@@ -19,4 +19,4 @@ spec:
         resources:
           requests:
             storage: 5Gi
-        storageClassName: local-sc
+        storageClassName: kubevirt-hostpath-provisioner

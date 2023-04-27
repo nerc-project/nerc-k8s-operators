@@ -2,15 +2,15 @@ apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
 metadata:
   name: eck-kibana
-  namespace: nerceckdeployment
+  namespace: nerceckdev1
 spec:
   version: 8.6.2
   count: 1
   elasticsearchRef:
     name: "eck-elastic"
   config:
-    xpack.fleet.agents.elasticsearch.hosts: ["https://eck-elastic-nerceckdeployment.apps.aa-dev-shift1.rc.fas.harvard.edu:443","https://eck-elastic-es-http:9200"]
-    xpack.fleet.agents.fleet_server.hosts: ["https://eck-fleet-nerceckdeployment.apps.aa-dev-shift1.rc.fas.harvard.edu:443","https://eck-fleet-agent-http:8220"]
+    xpack.fleet.agents.elasticsearch.hosts: ["https://eck-elastic-nerceckdev1.apps.aa-dev-shift2.rc.fas.harvard.edu","http://eck-elastic-es-http:9200"]
+    xpack.fleet.agents.fleet_server.hosts: ["https://eck-fleet-nerceckdev1.apps.aa-dev-shift2.rc.fas.harvard.edu:443","http://eck-fleet-agent-http:8220"]
     xpack.fleet.packages:
       - name: system
         version: latest
@@ -22,7 +22,7 @@ spec:
       - name: Fleet Server on ECK policy
         id: eck-fleet-server
         is_default_fleet_server: true
-        namespace: nerceckdeployment
+        namespace: nerceckdev1
         monitoring_enabled:
           - logs
           - metrics
@@ -34,7 +34,7 @@ spec:
             name: fleet_server
       - name: Elastic Agent on ECK policy
         id: eck-agent
-        namespace: nerceckdeployment
+        namespace: nerceckdev1
         monitoring_enabled:
           - logs
           - metrics

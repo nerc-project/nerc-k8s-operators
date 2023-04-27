@@ -1,10 +1,11 @@
 resources:
  - ../../../base/eck
+ - deploy-namespace.yaml
  - elastic.yaml
  - elastic-route.yaml
  - kibana.yaml
  - kibana-route.yaml
+ - rolesnbindings.yaml
+ - agent.yaml
  - fleet.yaml
  - fleet-route.yaml
- - elastic-agent.yaml
- - rolesnbindings.yaml

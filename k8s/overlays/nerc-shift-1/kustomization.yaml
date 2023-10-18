@@ -13,3 +13,4 @@ resources:
   - kubelet
   - ingress-controllers
   - api-server
+  - image-registry

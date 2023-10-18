@@ -1,0 +1,18 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: crunchy-postgres
+  namespace: postgres-operator
+spec:
+  lookupPolicy:
+    local: true
+  tags:
+    - name: latest
+      annotations: null
+      from:
+        kind: DockerImage
+        name: 'registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-13.9-2'
+      importPolicy:
+        scheduled: true
+      referencePolicy:
+        type: Source

@@ -1,0 +1,4 @@
+resources:
+  - postgres.yaml
+  - pgbouncer.yaml
+  - pgbackrest.yaml

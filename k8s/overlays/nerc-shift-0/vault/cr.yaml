@@ -7,7 +7,7 @@ spec:
   size: 1
   image: vault:1.6.2
   # specify a custom bank-vaults image with bankVaultsImage:
-  # bankVaultsImage: ghcr.io/banzaicloud/bank-vaults:latest
+  bankVaultsImage: ghcr.io/banzaicloud/bank-vaults:1.18.0
 
   # Common annotations for all created resources
   annotations:

@@ -1,0 +1,2 @@
+resources:
+  - postgres-operator-image-puller.yaml

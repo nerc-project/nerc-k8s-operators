@@ -15,7 +15,7 @@ spec:
         dhcp: false
         address:
           - ip: 140.247.152.11
-            prefix-length: 24
+            prefix-length: 27
       vlan:
         base-iface: bond0
         id: 2142

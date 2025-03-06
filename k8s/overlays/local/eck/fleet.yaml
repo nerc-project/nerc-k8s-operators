@@ -1,0 +1,21 @@
+apiVersion: agent.k8s.elastic.co/v1alpha1
+kind: Agent
+metadata:
+  name: eck-fleet
+  namespace: nerceckdev1
+spec:
+  version: 8.6.2
+  kibanaRef:
+    name: eck-kibana
+  elasticsearchRefs:
+  - name: eck-elastic
+  mode: fleet
+  fleetServerEnabled: true
+  deployment:
+    replicas: 1
+    podTemplate:
+      spec:
+        serviceAccountName: elastic-agent
+        automountServiceAccountToken: true
+        securityContext:
+          runAsUser: 0

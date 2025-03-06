@@ -1,14 +1,55 @@
 apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
 metadata:
-  name: nerc-eck
-  namespace: nerc-eck
+  name: eck-kibana
+  namespace: nerceckdev1
 spec:
-  version: 7.17.0
+  version: 8.6.2
   count: 1
   elasticsearchRef:
-    name: nerc-eck
+    name: "eck-elastic"
   config:
-    server.publicBaseUrl:
-      # https://kibana-nerc-eck.apps.nerc-shift-0.rc.fas.harvard.edu
-      https://kibana-nerc-eck.apps.aa-shift-dev3.fas.harvard.edu
+    xpack.fleet.agents.elasticsearch.hosts: ["https://eck-elastic-nerceckdev1.apps.aa-dev-shift2.rc.fas.harvard.edu","http://eck-elastic-es-http:9200"]
+    xpack.fleet.agents.fleet_server.hosts: ["https://eck-fleet-nerceckdev1.apps.aa-dev-shift2.rc.fas.harvard.edu:443","http://eck-fleet-agent-http:8220"]
+    xpack.fleet.packages:
+      - name: system
+        version: latest
+      - name: elastic_agent
+        version: latest
+      - name: fleet_server
+        version: latest
+    xpack.fleet.agentPolicies:
+      - name: Fleet Server on ECK policy
+        id: eck-fleet-server
+        is_default_fleet_server: true
+        namespace: nerceckdev1
+        monitoring_enabled:
+          - logs
+          - metrics
+        unenroll_timeout: 900
+        package_policies:
+        - name: fleet_server-1
+          id: fleet_server-1
+          package:
+            name: fleet_server
+      - name: Elastic Agent on ECK policy
+        id: eck-agent
+        namespace: nerceckdev1
+        monitoring_enabled:
+          - logs
+          - metrics
+        unenroll_timeout: 900
+        is_default: true
+        package_policies:
+          - name: system-1
+            id: system-1
+            package:
+              name: system
+  podTemplate:
+    spec:
+      containers:
+      - name: kibana
+        resources:
+          limits:
+            memory: 1Gi
+            cpu: 1

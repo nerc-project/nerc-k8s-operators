@@ -1,12 +1,12 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: eck-kibana
+  name: eck-elastic
   namespace: nerceckdev1
 spec:
   tls:
-    termination: passthrough # Kibana is the TLS endpoint
+    termination: passthrough # Elasticsearch is the TLS endpoint
     insecureEdgeTerminationPolicy: Redirect
   to:
     kind: Service
-    name: eck-kibana-kb-http
+    name: eck-elastic-es-http
